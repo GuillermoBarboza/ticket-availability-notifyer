@@ -14,6 +14,8 @@ const transporter = nodemailer.createTransport({
 const app = express();
 
 app.get("/", async (req, res) => {
+  res.setHeader("Content-Type", "text/html");
+  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   const url = "https://www.redtickets.uy/pago/9877/no-vcache";
 
   const browser = await puppeteer.launch();
@@ -51,3 +53,4 @@ app.get("/", async (req, res) => {
 app.listen(3000, () => {
   console.log("App listening on port 3000");
 });
+module.exports = app;
